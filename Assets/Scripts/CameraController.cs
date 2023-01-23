@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,19 +6,21 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] Transform origin;
-    [SerializeField] float cameraHeight;
-    [SerializeField] float cameraDistance;
-    [SerializeField] float rotationSpeeed;
-    Vector3 mouseInput;
-    void Start()
+    [SerializeField] float cameraHeight = 1f;
+    [SerializeField] float cameraDistance = -3f;
+    [SerializeField] float cameraSpeed = 0.1f;
+    Vector3 cameraAngles = new Vector3();
+    void Update()
     {
-
-    }
-    void OnPreRender()
-    {
-        transform.position = origin.position + new Vector3(0,cameraHeight,0) + transform.rotation * new Vector3(0,0,-cameraDistance);
-        mouseInput += new Vector3(0, Input.GetAxis("Horizontal") * rotationSpeeed, 0) * Time.deltaTime;
-        Quaternion cameraRotation = Quaternion.Euler(mouseInput);
+        UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        Vector3 mouseInput = new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"));
+        cameraAngles += mouseInput * cameraSpeed;
+        cameraAngles.x = Math.Clamp(cameraAngles.x, -45, 70);
+        Quaternion cameraRotation = Quaternion.Euler(cameraAngles);
+        Vector3 cameraPosition = origin.position + origin.rotation * new Vector3(0, cameraHeight, 0) + cameraRotation * new Vector3(0, 0, -cameraDistance); ;
+        Vector3 cameraRotatedPosition = cameraRotation * cameraPosition;
         transform.rotation = cameraRotation;
+        transform.position = cameraPosition;
     }
 }

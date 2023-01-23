@@ -14,18 +14,19 @@ public class Car
     [SerializeField] Wheel wheelBR;
     [SerializeField] float radius;
     [SerializeField] float dampingForce;
-    [SerializeField] float forceX = 0.1f;
+    [SerializeField] float forceValue = 0.1f;
+    [SerializeField] float accelerationForce;
     Wheel[] wheels;
     public void Initialize(GameObject gameObject)
     {
         rigidbody = gameObject.GetComponent<Rigidbody>();
         carCollider = gameObject.AddComponent<BoxCollider>();
-        carCollider.center = new Vector3(0,0.25f,0);
-        carCollider.size = new Vector3(1,1,2);
-        wheelFL.Initialize(radius, dampingForce,forceX);
-        wheelFR.Initialize(radius, dampingForce, forceX);
-        wheelBL.Initialize(radius, dampingForce, forceX);
-        wheelBR.Initialize(radius, dampingForce, forceX);
+        carCollider.center = new Vector3(0,0.35f,0.15f);
+        carCollider.size = new Vector3(1.6f,1.15f,4f);
+        wheelFL.Initialize(radius, dampingForce,forceValue, 0);
+        wheelFR.Initialize(radius, dampingForce, forceValue, 0);
+        wheelBL.Initialize(radius, dampingForce, forceValue, accelerationForce);
+        wheelBR.Initialize(radius, dampingForce, forceValue, accelerationForce);
         wheels = new Wheel[] {wheelFL, wheelFR, wheelBL, wheelBR};
     }
 
@@ -33,7 +34,7 @@ public class Car
     {
         foreach(var wheel in wheels)
         {
-            wheel.Damping();
+            wheel.FixedUpdate();
         }
     }
 }

@@ -228,6 +228,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -923488327215334976, guid: 20ed38b8ead32c946a48ee1b383cf63c, type: 3}
   m_PrefabInstance: {fileID: 808262632}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &723515264 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6127286164264526223, guid: 20ed38b8ead32c946a48ee1b383cf63c, type: 3}
+  m_PrefabInstance: {fileID: 808262632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &782389879
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,20 +265,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   car:
     wheelFL:
+      wheelMesh: {fileID: 723515264}
       wheelGameObj: {fileID: 1277381568}
       carGameObj: {fileID: 782389879}
     wheelFR:
+      wheelMesh: {fileID: 785588298}
       wheelGameObj: {fileID: 2098368419}
       carGameObj: {fileID: 782389879}
     wheelBL:
+      wheelMesh: {fileID: 1925802797}
       wheelGameObj: {fileID: 560997449}
       carGameObj: {fileID: 782389879}
     wheelBR:
+      wheelMesh: {fileID: 2097293403}
       wheelGameObj: {fileID: 302198405}
       carGameObj: {fileID: 782389879}
-    radius: 0.5
-    dampingForce: 0.5
-    forceX: 0.1
+    radius: 0.27
+    dampingForce: 0.2
+    forceValue: 0.1
+    accelerationForce: 0.05
 --- !u!4 &782389881
 Transform:
   m_ObjectHideFlags: 0
@@ -303,13 +313,18 @@ Rigidbody:
   m_GameObject: {fileID: 782389879}
   serializedVersion: 2
   m_Mass: 500
-  m_Drag: 0
+  m_Drag: 0.2
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!1 &785588298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -606648321376148333, guid: 20ed38b8ead32c946a48ee1b383cf63c, type: 3}
+  m_PrefabInstance: {fileID: 808262632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &808262632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -506,7 +521,7 @@ MonoBehaviour:
   origin: {fileID: 782389881}
   cameraHeight: 1
   cameraDistance: 5
-  rotationSpeeed: 100
+  cameraSpeed: 1
 --- !u!4 &1172770506 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3769083459912008051, guid: 20ed38b8ead32c946a48ee1b383cf63c, type: 3}
@@ -619,6 +634,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b051d01de8923e94fb35423642675856, type: 3}
+--- !u!1 &1925802797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2448700644823614438, guid: 20ed38b8ead32c946a48ee1b383cf63c, type: 3}
+  m_PrefabInstance: {fileID: 808262632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2097293403 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1408190032788793274, guid: 20ed38b8ead32c946a48ee1b383cf63c, type: 3}
+  m_PrefabInstance: {fileID: 808262632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2098368419
 GameObject:
   m_ObjectHideFlags: 0
