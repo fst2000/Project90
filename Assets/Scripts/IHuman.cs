@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IHuman
 {
-    
+    void StartAnimation(string state);
 }

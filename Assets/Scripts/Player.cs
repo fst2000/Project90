@@ -20,6 +20,7 @@ public class Player : IHuman
     public Player(GameObject gameObject)
     {
         this.animator = gameObject.GetComponent<Animator>();
+        currentState = new WalkState(this);
 
         transform = gameObject.GetComponent<Transform>();
         rigidbody = gameObject.AddComponent<Rigidbody>();
@@ -57,17 +58,21 @@ public class Player : IHuman
     }
     public void UpdateInput()
     {
-        moveInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetKeyDown(KeyCode.Space)? 1 : 0, Input.GetAxis("Vertical"));
+        moveInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
     }
     public void WalkFixed()
     {
         float velocityY = rigidbody.velocity.y;
-        rigidbody.velocity = transform.forward * Input.GetAxis("Vertical") * walkSpeed + new Vector3(0, velocityY, 0);
-        transform.rotation = Quaternion.Euler(0,Input.GetAxis("Horizontal") * rotationSpeed,0) * transform.rotation;
+        rigidbody.velocity = transform.forward * moveInput.z * walkSpeed + new Vector3(0, velocityY, 0);
+        transform.rotation = Quaternion.Euler(0,moveInput.x * rotationSpeed,0) * transform.rotation;
     }
     
     public void Jump()
     {
         rigidbody.AddForce(0,jumpForce, 0, ForceMode.VelocityChange);
+    }
+    public bool OnGroundCheck()
+    {
+        return Physics.CheckSphere(transform.position, 0.15f);
     }
 }

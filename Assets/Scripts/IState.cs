@@ -6,7 +6,6 @@ using UnityEngine;
 {
     void OnEnter();
     void OnUpdate();
-    void OnFixedUpdate();
     void OnExit();
     IState NextState();
 }

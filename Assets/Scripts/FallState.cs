@@ -2,26 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkState : IState
+public class FallState : IState
 {
     IHuman human;
-    public WalkState(IHuman human)
+    public FallState(IHuman human)
     {
         this.human = human;
     }
     public void OnEnter()
     {
-        human.StartAnimation("Walk");
+        human.StartAnimation("Fall");
     }
     public void OnUpdate()
     {
 
     }
+    public void OnFixedUpdate()
+    {
+
+    }
     public void OnExit()
     {
-        
+
     }
-    IState IState.NextState()
+    public IState NextState()
     {
         return this;
     }

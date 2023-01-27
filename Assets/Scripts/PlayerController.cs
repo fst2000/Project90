@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    IState istate;
     Player player;
     void Start()
     {
         player = new Player(gameObject);
-        istate = new WalkState(player);
-        istate.OnEnter();
     }
 
-    // Update is called once per frame
+    void Update()
+    {
+       player.OnUpdate();
+    }
     void FixedUpdate()
     {
-        istate.OnUpdate();
+        player.OnFixedUpdate();
     }
 }
