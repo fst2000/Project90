@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
- public interface IState
+ public interface IHumanState
 {
+    IHumanSize Size{get;}
+    IHumanMotion Motion{get;}
     void OnEnter();
     void OnUpdate();
     void OnExit();
-    IState NextState();
+    IHumanState NextState();
 }

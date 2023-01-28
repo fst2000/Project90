@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkState : IState
+public class WalkState : IHumanState
 {
     IHuman human;
+    public IHumanSize Size{get; private set;}
+    public IHumanMotion Motion{get; private set;}
     public WalkState(IHuman human)
     {
         this.human = human;
@@ -21,7 +23,7 @@ public class WalkState : IState
     {
         
     }
-    IState IState.NextState()
+    IHumanState IHumanState.NextState()
     {
         return this;
     }

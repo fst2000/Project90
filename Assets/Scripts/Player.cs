@@ -3,39 +3,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : IHuman
+public class Player : IHuman, IHumanSize, IHumanMotion
 {
-    Transform transform;
-    Rigidbody rigidbody;
-    CapsuleCollider capsuleCollider;
     Animator animator;
+    IHumanState currentState;
+    public IMoveSystem MoveSystem { get; private set;}
 
-    IState currentState;
-
-    Vector3 moveInput;
-
-    float walkSpeed;
-    float rotationSpeed;
-    float jumpForce;
     public Player(GameObject gameObject)
     {
-        this.animator = gameObject.GetComponent<Animator>();
+        animator = gameObject.GetComponent<Animator>();
         currentState = new WalkState(this);
-
-        transform = gameObject.GetComponent<Transform>();
-        rigidbody = gameObject.AddComponent<Rigidbody>();
-        rigidbody.freezeRotation = true;
-        rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
-        rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
-
-        capsuleCollider = gameObject.AddComponent<CapsuleCollider>();
-        capsuleCollider.height = 1.8f;
-        capsuleCollider.center = new Vector3(0, 0.9f, 0);
-        capsuleCollider.radius = 0.2f;
-
-        walkSpeed = 3.2f;
-        rotationSpeed = 3f;
-        jumpForce = 1f;
+        MoveSystem = new RigidbodyMoveSystem(gameObject, this, this);
     }
     public void StartAnimation(string state)
     {
@@ -43,7 +21,7 @@ public class Player : IHuman
     }
     public void OnUpdate()
     {
-        IState nextState = currentState.NextState();
+        IHumanState nextState = currentState.NextState();
         if (currentState != nextState)
         {
             currentState.OnExit();
@@ -52,27 +30,9 @@ public class Player : IHuman
         }
         currentState.OnUpdate();
     }
-    public void OnFixedUpdate()
-    {
-        currentState.OnFixedUpdate();
-    }
-    public void UpdateInput()
-    {
-        moveInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-    }
-    public void WalkFixed()
-    {
-        float velocityY = rigidbody.velocity.y;
-        rigidbody.velocity = transform.forward * moveInput.z * walkSpeed + new Vector3(0, velocityY, 0);
-        transform.rotation = Quaternion.Euler(0,moveInput.x * rotationSpeed,0) * transform.rotation;
-    }
-    
-    public void Jump()
-    {
-        rigidbody.AddForce(0,jumpForce, 0, ForceMode.VelocityChange);
-    }
-    public bool OnGroundCheck()
-    {
-        return Physics.CheckSphere(transform.position, 0.15f);
-    }
+
+    public float Height => currentState.Size.Height;
+    public float Radius => currentState.Size.Radius;
+    public float MoveSpeed => currentState.Motion.MoveSpeed;
+    public float RotationSpeed => currentState.Motion.RotationSpeed;
 }

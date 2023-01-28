@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallState : IState
+public class FallState : IHumanState
 {
     IHuman human;
+
+    public IHumanSize Size => throw new System.NotImplementedException();
+
+    public IHumanMotion Motion => throw new System.NotImplementedException();
+
     public FallState(IHuman human)
     {
         this.human = human;
@@ -25,7 +30,7 @@ public class FallState : IState
     {
 
     }
-    public IState NextState()
+    public IHumanState NextState()
     {
         return this;
     }

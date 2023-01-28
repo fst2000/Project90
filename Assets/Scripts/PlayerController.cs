@@ -12,10 +12,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-       player.OnUpdate();
-    }
-    void FixedUpdate()
-    {
-        player.OnFixedUpdate();
+        player.OnUpdate();
     }
 }
