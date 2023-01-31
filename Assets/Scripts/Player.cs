@@ -7,13 +7,16 @@ public class Player : IHuman, IHumanSize, IHumanMotion
 {
     Animator animator;
     IHumanState currentState;
+    Event<IFixedUpdateHandler> fixedUpdateEvent = new Event<IFixedUpdateHandler>(subscriber => subscriber.FixedUpdate());
     public IMoveSystem MoveSystem { get; private set;}
+    public IController Controller{get; private set;}
 
     public Player(GameObject gameObject)
     {
         animator = gameObject.GetComponent<Animator>();
         currentState = new WalkState(this);
-        MoveSystem = new RigidbodyMoveSystem(gameObject, this, this);
+        MoveSystem = new RigidbodyMoveSystem(gameObject, this, this,fixedUpdateEvent);
+        Controller = new PlayerController();
     }
     public void StartAnimation(string state)
     {

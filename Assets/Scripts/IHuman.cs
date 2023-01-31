@@ -6,4 +6,5 @@ public interface IHuman
 {
     void StartAnimation(string state);
     IMoveSystem MoveSystem { get; }
+    IController Controller { get; }
 }
