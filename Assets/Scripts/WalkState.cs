@@ -7,6 +7,8 @@ public class WalkState : IHumanState
     IHuman human;
     public IHumanSize Size{get; private set;}
     public IHumanMotion Motion{get; private set;}
+    public IMoveSystem MoveSystem{get; private set;}
+    public IController Controller{get; private set;}
     public WalkState(IHuman human)
     {
         this.human = human;
@@ -17,7 +19,7 @@ public class WalkState : IHumanState
     }
     public void OnUpdate()
     {
-
+        
     }
     public void OnExit()
     {

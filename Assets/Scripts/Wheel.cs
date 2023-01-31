@@ -7,10 +7,7 @@ using UnityEngine.Windows;
 [System.Serializable]
 public class Wheel
 {
-    [SerializeField] GameObject wheelMesh;
     [SerializeField] GameObject wheelGameObj;
-    [SerializeField] GameObject carGameObj;
-
     Transform carTransform;
     Transform wheelTransform;
     Rigidbody carRigidbody;
@@ -24,7 +21,7 @@ public class Wheel
     Quaternion rotation;
     RaycastHit hit;
     Vector3 hitPoint;
-    public void Initialize(float radius, float dampingForce, float forceValue, float accelerationForce)
+    public void Initialize(GameObject carGameObj, float radius, float dampingForce, float forceValue, float accelerationForce)
     {
         wheelTransform = wheelGameObj.transform;
         carTransform = carGameObj.transform;
@@ -50,7 +47,7 @@ public class Wheel
     }
     private void Damping()
     {
-            wheelMesh.transform.position = position - carTransform.rotation * (Vector3.up * hit.distance - Vector3.up * radius);
+            wheelGameObj.transform.position = position - carTransform.rotation * (Vector3.up * hit.distance - Vector3.up * radius);
             float forceMultiplier = Vector3.Dot(carTransform.up, carRigidbody.GetPointVelocity(position)) * forceValue;
             forceMultiplier = Mathf.Max((radius - hit.distance)/ radius - forceMultiplier, 0);
             if (forceMultiplier > 0)

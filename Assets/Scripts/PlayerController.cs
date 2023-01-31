@@ -1,17 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerController : MonoBehaviour
+public class PlayerController : IController
 {
-    Player player;
-    void Start()
+    public float MoveInput{get;private set;}
+    public float RotationInput{get;private set;}
+    public PlayerController()
     {
-        player = new Player(gameObject);
-    }
-
-    void Update()
-    {
-        player.OnUpdate();
+        MoveInput = Input.GetAxis("Vertical");
+        RotationInput = Input.GetAxis("Horizontal");
     }
 }

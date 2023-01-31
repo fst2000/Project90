@@ -21,12 +21,12 @@ public class Car
     {
         rigidbody = gameObject.GetComponent<Rigidbody>();
         carCollider = gameObject.AddComponent<BoxCollider>();
-        carCollider.center = new Vector3(0,0.35f,0.15f);
+        carCollider.center = new Vector3(0,0.88f,0.15f);
         carCollider.size = new Vector3(1.6f,1.15f,4f);
-        wheelFL.Initialize(radius, dampingForce,forceValue, 0);
-        wheelFR.Initialize(radius, dampingForce, forceValue, 0);
-        wheelBL.Initialize(radius, dampingForce, forceValue, accelerationForce);
-        wheelBR.Initialize(radius, dampingForce, forceValue, accelerationForce);
+        wheelFL.Initialize(gameObject, radius, dampingForce,forceValue, 0);
+        wheelFR.Initialize(gameObject, radius, dampingForce, forceValue, 0);
+        wheelBL.Initialize(gameObject, radius, dampingForce, forceValue, accelerationForce);
+        wheelBR.Initialize(gameObject, radius, dampingForce, forceValue, accelerationForce);
         wheels = new Wheel[] {wheelFL, wheelFR, wheelBL, wheelBR};
     }
 
