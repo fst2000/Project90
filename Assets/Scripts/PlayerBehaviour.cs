@@ -14,4 +14,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         player.OnUpdate();
     }
+    void FixedUpdate()
+    {
+        player.OnFixedUpdate();
+    }
 }

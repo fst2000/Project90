@@ -38,7 +38,7 @@ public class RigidbodyMoveSystem : IMoveSystem, IFixedUpdateHandler
         return isOnGround;
     }
 
-    public void Move(Vector3 direction)
+    public void DesiredVelocityChange(Vector3 direction)
     {
         direction = direction.normalized;
         desiredVelocity = direction * motion.MoveSpeed;

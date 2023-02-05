@@ -8,6 +8,7 @@ public class Player : IHuman, IHumanSize, IHumanMotion
     Animator animator;
     IHumanState currentState;
     Event<IFixedUpdateHandler> fixedUpdateEvent = new Event<IFixedUpdateHandler>(subscriber => subscriber.FixedUpdate());
+    Event<IUpdateHandler> updateHandler = new Event<IUpdateHandler>(subscriber => subscriber.Update());
     public IMoveSystem MoveSystem { get; private set;}
     public IController Controller{get; private set;}
 
@@ -24,6 +25,7 @@ public class Player : IHuman, IHumanSize, IHumanMotion
     }
     public void OnUpdate()
     {
+        updateHandler.Call();
         IHumanState nextState = currentState.NextState();
         if (currentState != nextState)
         {
@@ -32,6 +34,10 @@ public class Player : IHuman, IHumanSize, IHumanMotion
             currentState.OnEnter();
         }
         currentState.OnUpdate();
+    }
+    public void OnFixedUpdate()
+    {
+        fixedUpdateEvent.Call();
     }
 
     public float Height => currentState.Size.Height;

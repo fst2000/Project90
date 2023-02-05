@@ -18,7 +18,7 @@ public class WalkState : IHumanState
     public void OnUpdate()
     {
         Vector2 moveInput = human.Controller.MoveInput;
-        human.MoveSystem.Move(new Vector3(moveInput.x,0,moveInput.y));
+        human.MoveSystem.DesiredVelocityChange(new Vector3(moveInput.x,0,moveInput.y));
     }
     public void OnExit()
     {

@@ -2,7 +2,7 @@
 
 public interface IMoveSystem
 {
-    void Move(Vector3 direction);
+    void DesiredVelocityChange(Vector3 direction);
     bool IsOnGround();
    
 }
