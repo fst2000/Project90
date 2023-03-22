@@ -1,4 +1,5 @@
-public interface IEvent<THandler>
+public interface IEvent
 {
-    void Subscribe(THandler handler);
+    void Subscribe(EventDelegate method);
 }
+public delegate void EventDelegate();
