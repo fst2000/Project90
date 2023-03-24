@@ -237,7 +237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 20ed38b8ead32c946a48ee1b383cf63c, type: 3}
       propertyPath: m_Name
-      value: Lada 9 V_0_1
+      value: Lada 9
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 20ed38b8ead32c946a48ee1b383cf63c, type: 3}
       propertyPath: m_Layer
@@ -301,7 +301,10 @@ MonoBehaviour:
   - wheelTransform: {fileID: 953603239}
   - wheelTransform: {fileID: 953603238}
   - wheelTransform: {fileID: 953603237}
+  carMass: 600
   wheelRadius: 0.28
+  dampingForce: 0.25
+  dampingClamp: 0.25
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,6 +455,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 921a6de097577ed478004d097c154627, type: 3}
       propertyPath: m_Name
       value: CarTrainingRace
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 921a6de097577ed478004d097c154627, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 921a6de097577ed478004d097c154627, type: 3}
